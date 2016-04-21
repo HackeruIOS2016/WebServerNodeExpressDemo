@@ -38,8 +38,8 @@ router.get('/api/addnote', function (request, response) {
 	console.log(note);
 	console.log(id);
 
-	if (!title || !note ||!id) {response.end('bad request')}
-	return
+	if (!title || !note ||!id) {response.end('bad request'); return}
+
     var ins = "INSERT INTO notes VALUES('" + id + "','" +title +"','" + note +"');" 
     console.log(ins);
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
@@ -65,8 +65,8 @@ router.post('/api/addnote', function (request, response) {
 	console.log(note);
 	console.log(id);
 
-	if (!title || !note ||!id) {response.end('bad request')}
-	return
+	if (!title || !note ||!id) {response.end('bad request'); return}
+
     var ins = "INSERT INTO notes VALUES('" + id + "','" +title +"','" + note +"');" 
     console.log(ins);
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
