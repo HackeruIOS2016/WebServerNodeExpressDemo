@@ -31,7 +31,7 @@ router.get('/api/createdb', function (request, response) {
 
 router.get('/api/addnote', function (request, response) {
 	response.render('addnote');
-})
+});
 
 
 
