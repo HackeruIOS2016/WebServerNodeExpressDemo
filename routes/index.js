@@ -34,21 +34,22 @@ router.get('/api/addnote', function (request, response) {
 	var note = request.query.note;
 	var id = request.query.id;
 
-console.log(title);
-console.log(note);
-console.log(id);
+	console.log(title);
+	console.log(note);
+	console.log(id);
 
-
-  var ins = "INSERT INTO notes VALUES('" + id + "','" +title +"','" + note +"');" 
-  console.log(ins);
-  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-    client.query(ins, function(err, result) {
-      done();
-      if (err){ console.error(err); response.send("Error " + err); }
-      else
-       {response.json(result);}
+	if (!title || !note ||!id) {response.end('bad request')}
+	return
+    var ins = "INSERT INTO notes VALUES('" + id + "','" +title +"','" + note +"');" 
+    console.log(ins);
+    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+      client.query(ins, function(err, result) {
+        done();
+        if (err){ console.error(err); response.send("Error " + err); }
+        else
+         {response.json(result);}
+      });
     });
-  });
 })
 
 
