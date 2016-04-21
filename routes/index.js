@@ -29,6 +29,30 @@ router.get('/api/createdb', function (request, response) {
 
 
 
+router.get('/api/addnote', function (request, response) {
+	var title = request.query.title;
+	var note = request.query.note;
+	var id = request.query.id;
+
+console.log(title);
+console.log(note);
+console.log(id);
+
+
+  var ins = "INSERT INTO notes VALUES('" + id + "','" +title +"','" + note +"');" 
+  console.log(ins);
+  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    client.query(ins, function(err, result) {
+      done();
+      if (err){ console.error(err); response.send("Error " + err); }
+      else
+       {response.json(result);}
+    });
+  });
+})
+
+
+
 
 router.get('/api/notes', function (request, response) {
   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
